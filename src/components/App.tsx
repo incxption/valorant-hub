@@ -12,7 +12,7 @@ export default function App() {
         <div className={classNames("w-full h-full transition-colors", darkMode && "dark")}>
             <TitleBar />
             <div
-                className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="bg-gray-100 flex dark:bg-gray-800 text-gray-800 dark:text-gray-100 overflow-auto"
                 style={{ height: "calc(100% - 1.5rem)" }}
             >
                 <Router>
