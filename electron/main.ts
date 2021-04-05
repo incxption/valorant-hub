@@ -48,14 +48,13 @@ async function createWindow() {
 
     // DevTools
     installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log("Added xtension:", name))
+        .then((name) => console.log("Added extension:", name))
         .catch((err) => console.log("An error occurred:", err))
 
     window.show()
     if (isDev) {
         window.setAlwaysOnTop(true)
         window.focus()
-        window.setAlwaysOnTop(false)
     }
 }
 
