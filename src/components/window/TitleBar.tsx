@@ -1,5 +1,5 @@
 import React from "react"
-import { IoBrowsersOutline, IoIosClose, IoIosRemove } from "react-icons/all"
+import { IoIosClose, IoIosRemove } from "react-icons/all"
 import TitleBarButton from "@components/window/TitleBarButton"
 
 import "@styles/title-bar.css"
@@ -11,10 +11,6 @@ const {
 
 const TitleBar: React.FC = () => {
     const minimize = () => BrowserWindow.getFocusedWindow()?.minimize()
-    const maximize = () => {
-        const window = BrowserWindow.getFocusedWindow()
-        window?.isMaximized() ? window?.unmaximize() : window?.maximize()
-    }
     const close = () => BrowserWindow.getFocusedWindow()?.close()
 
     return (
@@ -30,9 +26,6 @@ const TitleBar: React.FC = () => {
             <div id="title-bar-buttons" className="h-full flex flex-row">
                 <TitleBarButton onClick={minimize}>
                     <IoIosRemove size="1.8em" />
-                </TitleBarButton>
-                <TitleBarButton onClick={maximize}>
-                    <IoBrowsersOutline size="0.9em" />
                 </TitleBarButton>
                 <TitleBarButton onClick={close} redBackground>
                     <IoIosClose size="1.8em" />
