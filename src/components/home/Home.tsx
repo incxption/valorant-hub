@@ -2,13 +2,16 @@ import React from "react"
 import Breadcrumb from "@components/window/Breadcrumb"
 import Product from "@components/home/Product"
 import { IoIosSettings, IoKey } from "react-icons/all"
+import { History } from "history"
 
-type Props = {}
+type Props = {
+    history: History
+}
 
-const Home: React.FC<Props> = () => {
+const Home: React.FC<Props> = ({ history }) => {
     return (
         <div className="flex-grow flex flex-col p-3">
-            <Breadcrumb path={[]} />
+            <Breadcrumb history={history} path={[]} />
             <div className="w-full flex-grow mt-5 px-5 flex justify-center items-center">
                 <Product
                     name="Configurator"
@@ -16,6 +19,7 @@ const Home: React.FC<Props> = () => {
                     route="/configurator"
                     icon={IoIosSettings}
                     colors={["purple-500", "indigo-500"]}
+                    history={history}
                 />
                 <Product
                     name="Account Manager"
@@ -23,6 +27,7 @@ const Home: React.FC<Props> = () => {
                     route="/account_manager"
                     icon={IoKey}
                     colors={["yellow-400", "orange-500"]}
+                    history={history}
                 />
             </div>
         </div>

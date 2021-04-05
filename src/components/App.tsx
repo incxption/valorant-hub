@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import classNames from "classnames"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from "@components/home/Home"
-import Breadcrumb from "@components/window/Breadcrumb"
+import Configurator from "@components/configurator/Configurator"
 
 export default function App() {
     const [darkMode] = useState(false)
@@ -17,19 +17,8 @@ export default function App() {
             >
                 <Router>
                     <Switch>
-                        <Route path="/account_manager">
-                            <div className="flex-grow flex flex-col p-3">
-                                <Breadcrumb path={[{ route: "/account_manager", label: "Account Manager" }]} />
-                            </div>
-                        </Route>
-                        <Route path="/configurator">
-                            <div className="flex-grow flex flex-col p-3">
-                                <Breadcrumb path={[{ route: "/configurator", label: "Configurator" }]} />
-                            </div>
-                        </Route>
-                        <Route path="/">
-                            <Home />
-                        </Route>
+                        <Route path="/configurator" component={Configurator} />
+                        <Route path="/" component={Home} />
                     </Switch>
                 </Router>
             </div>

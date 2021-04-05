@@ -1,5 +1,6 @@
 import React from "react"
 import { IconType } from "react-icons"
+import { History } from "history"
 
 type Props = {
     name: string
@@ -7,14 +8,15 @@ type Props = {
     route: string
     icon: IconType
     colors: [string, string]
+    history: History
 }
 
-const Product: React.FC<Props> = ({ name, description, icon: Icon, colors, route }) => {
+const Product: React.FC<Props> = ({ name, description, icon: Icon, colors, route, history }) => {
     return (
         <div
             className={`w-80 h-96 bg-gradient-to-b from-${colors[0]} to-${colors[1]} flex flex-col justify-between items-center
                 relative overflow-hidden text-gray-50 p-6 mx-6 rounded-xl shadow-md tracking-tight cursor-pointer`}
-            onClick={() => (window.location.pathname = route)}
+            onClick={() => history.push(route)}
         >
             <div>
                 <h1 className="text-xl font-bold mb-2">{name}</h1>
