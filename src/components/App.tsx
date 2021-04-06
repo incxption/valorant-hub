@@ -1,12 +1,14 @@
 import TitleBar from "@components/window/TitleBar"
 import React, { useState } from "react"
 import classNames from "classnames"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { Switch, Route, useLocation } from "react-router-dom"
 import Home from "@components/home/Home"
 import Configurator from "@components/configurator/Configurator"
+import { AnimatePresence } from "framer-motion"
 
 export default function App() {
     const [darkMode] = useState(false)
+    const location = useLocation()
 
     return (
         <div className={classNames("w-full h-full transition-colors", darkMode && "dark")}>
@@ -15,12 +17,12 @@ export default function App() {
                 className="bg-gray-100 flex dark:bg-gray-800 text-gray-800 dark:text-gray-100 overflow-auto"
                 style={{ height: "calc(100% - 1.5rem)" }}
             >
-                <Router>
-                    <Switch>
+                <AnimatePresence initial={false} exitBeforeEnter>
+                    <Switch location={location} key={window.location.pathname}>
                         <Route path="/configurator" component={Configurator} />
                         <Route path="/" component={Home} />
                     </Switch>
-                </Router>
+                </AnimatePresence>
             </div>
         </div>
     )
