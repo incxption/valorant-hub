@@ -7,7 +7,7 @@ import useQuery from "../../utils/useQuery"
 import Checkbox from "@components/configurator/Checkbox"
 import { IoAdd } from "react-icons/all"
 import classNames from "classnames"
-import { motion } from "framer-motion"
+import PageTransition from "@components/PageTransition"
 
 type Props = {
     history: History
@@ -35,7 +35,7 @@ const Configurator: React.FC<Props> = ({ history }) => {
     return (
         <div className="h-full w-full flex flex-col p-3 tracking-tight overflow-x-hidden">
             <Breadcrumb history={history} path={[{ route: "/configurator", label: "Configurator" }]} />
-            <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }}>
+            <PageTransition>
                 <div className="mx-4 mt-4">
                     <h1 className="font-semibold text-xl">
                         <span className="inline-block w-6 font-light text-gray-400">1.</span>
@@ -116,7 +116,7 @@ const Configurator: React.FC<Props> = ({ history }) => {
                         />
                     </div>
                 </div>
-            </motion.div>
+            </PageTransition>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import Product from "@components/home/Product"
 import { IoIosSettings, IoKey } from "react-icons/all"
 import { History } from "history"
 import { motion } from "framer-motion"
+import PageTransition from "@components/PageTransition"
 
 type Props = {
     history: History
@@ -13,12 +14,7 @@ const Home: React.FC<Props> = ({ history }) => {
     return (
         <div className="flex-grow flex flex-col p-3 overflow-x-hidden">
             <Breadcrumb history={history} path={[]} />
-            <motion.div
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                className="w-full flex-grow mt-5 px-5 flex justify-center items-center"
-            >
+            <PageTransition className="w-full flex-grow mt-5 px-5 flex justify-center items-center">
                 <Product
                     name="Configurator"
                     description="Synchronize your settings over multiple accounts and share profiles with other users."
@@ -35,7 +31,7 @@ const Home: React.FC<Props> = ({ history }) => {
                     colors={["yellow-400", "orange-500"]}
                     history={history}
                 />
-            </motion.div>
+            </PageTransition>
         </div>
     )
 }
