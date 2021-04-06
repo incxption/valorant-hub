@@ -3,6 +3,7 @@ import Breadcrumb from "@components/window/Breadcrumb"
 import Product from "@components/home/Product"
 import { IoIosSettings, IoKey } from "react-icons/all"
 import { History } from "history"
+import { motion } from "framer-motion"
 
 type Props = {
     history: History
@@ -10,9 +11,14 @@ type Props = {
 
 const Home: React.FC<Props> = ({ history }) => {
     return (
-        <div className="flex-grow flex flex-col p-3">
+        <div className="flex-grow flex flex-col p-3 overflow-x-hidden">
             <Breadcrumb history={history} path={[]} />
-            <div className="w-full flex-grow mt-5 px-5 flex justify-center items-center">
+            <motion.div
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                className="w-full flex-grow mt-5 px-5 flex justify-center items-center"
+            >
                 <Product
                     name="Configurator"
                     description="Synchronize your settings over multiple accounts and share profiles with other users."
@@ -29,7 +35,7 @@ const Home: React.FC<Props> = ({ history }) => {
                     colors={["yellow-400", "orange-500"]}
                     history={history}
                 />
-            </div>
+            </motion.div>
         </div>
     )
 }
