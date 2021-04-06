@@ -3,7 +3,6 @@ import Breadcrumb from "@components/window/Breadcrumb"
 import Product from "@components/home/Product"
 import { IoIosSettings, IoKey } from "react-icons/all"
 import { History } from "history"
-import { motion } from "framer-motion"
 import PageTransition from "@components/PageTransition"
 
 type Props = {
