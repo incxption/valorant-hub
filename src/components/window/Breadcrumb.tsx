@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import classNames from "classnames"
 import { IoIosArrowForward } from "react-icons/all"
 import { History } from "history"
@@ -20,7 +20,7 @@ const Breadcrumb: React.FC<Props> = ({ path, history }) => {
             {fullPath.map(({ label, route }, index) => {
                 const isLast = index === fullPath.length - 1
                 return (
-                    <>
+                    <Fragment key={label}>
                         <span
                             className={classNames(
                                 "cursor-pointer",
@@ -33,7 +33,7 @@ const Breadcrumb: React.FC<Props> = ({ path, history }) => {
                         {!isLast || fullPath.length === 1 ? (
                             <IoIosArrowForward className="inline mx-1.5 text-gray-400" />
                         ) : null}
-                    </>
+                    </Fragment>
                 )
             })}
         </div>
