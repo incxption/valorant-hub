@@ -14,8 +14,9 @@ const ConfiguratorStep: React.FC<Props> = ({ children, titlePrefix, title, descr
                 {title}
             </h1>
             <p className="text-sm -mt-1">{description}</p>
+            {children}
         </div>
     )
 }
 
-export { ConfiguratorStep }
+export default ConfiguratorStep
