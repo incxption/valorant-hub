@@ -5,6 +5,7 @@ import { IoIosArrowForward } from "react-icons/all"
 import windowedFullscreen from "@assets/configurator/preparation/windowed_fullscreen.png"
 import language from "@assets/configurator/preparation/language.png"
 import mainScreen from "@assets/configurator/preparation/main_screen.jpg"
+import { motion } from "framer-motion"
 
 type Props = {
     history: History
@@ -65,11 +66,12 @@ const Preparation: React.FC<Props> = ({ history }) => {
     }
 
     return (
-        <div
-            className="h-full w-full flex flex-col tracking-tight bg-cover relative"
-            style={{ backgroundImage: `url('${currentStep.image}')`, backgroundPosition: "0 2.3rem" }}
-        >
-            <div className="p-3 bg-gradient-to-b from-black via-black to-transparent h-20 dark">
+        <div className="h-full w-full flex flex-col tracking-tight bg-cover relative">
+            <div
+                className="h-full w-full tracking-tight bg-cover relative bg-no-repeat"
+                style={{ backgroundImage: `url('${currentStep.image}')`, backgroundPosition: "0 2.3rem" }}
+            ></div>
+            <div className="p-3 bg-gradient-to-b from-black via-black to-transparent h-20 dark z-50 absolute w-full">
                 <Breadcrumb
                     history={history}
                     path={[
@@ -78,18 +80,21 @@ const Preparation: React.FC<Props> = ({ history }) => {
                     ]}
                 />
             </div>
-            <div className="absolute left-0 bottom-0 w-full flex items-end px-5 py-4 bg-gray-50 border-t-2 border-blue-500">
-                <div className="flex-grow">
+            <div className="absolute left-0 bottom-0 w-full flex items-end px-5 py-4 bg-gray-50 border-t-2 border-blue-500 overflow-hidden">
+                <motion.div key={stepIndex} animate={{ y: 0 }} initial={{ y: 50 }} className="flex-grow">
                     <h1 className="text-black text-xl font-semibold tracking-tight mb-1">{currentStep.title}</h1>
-                    <div className="text-black w-full leading-5 pr-10">{currentStep.description}</div>
-                </div>
-                <button
+                    <p className="text-black w-full leading-5 pr-10">{currentStep.description}</p>
+                </motion.div>
+                <motion.button
+                    key={stepIndex + 1}
+                    animate={{ x: 0 }}
+                    initial={{ x: 200 }}
                     className="outline-none focus:outline-none ml-2 w-36 py-1.5 transition-colors bg-blue-500
                                border-2 border-blue-500 hover:border-blue-400 shadow-md text-white rounded-md"
                     onClick={next}
                 >
                     {stepIndex === steps.length - 1 ? "Finish" : "Next"}
-                </button>
+                </motion.button>
             </div>
         </div>
     )
