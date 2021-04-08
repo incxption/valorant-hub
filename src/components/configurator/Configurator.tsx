@@ -69,7 +69,7 @@ const Configurator: React.FC<Props> = ({ history }) => {
                                 setSelectedFile(-1)
                                 setReadMode(true)
                             }}
-                            tooltip="Create new file on run"
+                            tooltipText="Create new file on run"
                         />
                     </div>
                 </ConfiguratorStep>
@@ -81,13 +81,13 @@ const Configurator: React.FC<Props> = ({ history }) => {
                     <div className="mt-3 flex justify-start flex-wrap">
                         <Option
                             label="Extract from Valorant"
-                            tooltip="Scan settings and save to file"
+                            tooltipText="Scan settings and save to file"
                             selected={readMode}
                             onClick={() => setReadMode(true)}
                         />
                         <Option
                             label="Insert into Valorant"
-                            tooltip={
+                            tooltipText={
                                 selectedFile !== -1
                                     ? "Apply settings from file"
                                     : "Not allowed when creating a new file"
