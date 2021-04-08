@@ -8,6 +8,7 @@ import Checkbox from "@components/configurator/Checkbox"
 import { IoAdd } from "react-icons/all"
 import classNames from "classnames"
 import PageTransition from "@components/PageTransition"
+import ConfiguratorStep from "./ConfiguratorStep"
 
 type Props = {
     history: History
@@ -29,21 +30,22 @@ const Configurator: React.FC<Props> = ({ history }) => {
     const [isPrepared, setIsPrepared] = useState(false)
 
     if (preparation) {
-        return <Preparation history={history} />
+        return (
+            <PageTransition className="h-full w-full">
+                <Preparation history={history} />
+            </PageTransition>
+        )
     }
 
     return (
         <div className="h-full w-full flex flex-col p-3 tracking-tight overflow-x-hidden">
             <Breadcrumb history={history} path={[{ route: "/configurator", label: "Configurator" }]} />
             <PageTransition>
-                <div className="mx-4 mt-4">
-                    <h1 className="font-semibold text-xl">
-                        <span className="inline-block w-6 font-light text-gray-400">1.</span>
-                        File
-                    </h1>
-                    <p className="text-sm -mt-1">
-                        Select the file in which the Valorant settings are/should be stored.
-                    </p>
+                <ConfiguratorStep
+                    titlePrefix="1"
+                    title="File"
+                    description="Select the file in which the Valorant settings are/should be stored."
+                >
                     <div className="mt-3 flex justify-start flex-wrap">
                         {files.map((file, index) => (
                             <Option
@@ -70,16 +72,13 @@ const Configurator: React.FC<Props> = ({ history }) => {
                             tooltip="Create new file on run"
                         />
                     </div>
-                </div>
-                <div className="mx-4 mt-6">
-                    <h1 className="font-semibold text-xl">
-                        <span className="inline-block w-6 font-light text-gray-400">2.</span>
-                        Mode
-                    </h1>
-                    <p className="text-sm -mt-1">
-                        Should the configurator read the settings from or write them into Valorant?
-                    </p>
-                    <div className="mt-3 flex">
+                </ConfiguratorStep>
+                <ConfiguratorStep
+                    titlePrefix="2"
+                    title="Mode"
+                    description="Should the configurator read the settings from or write them into Valorant?"
+                >
+                    <div className="mt-3 flex justify-start flex-wrap">
                         <Option
                             label="Extract from Valorant"
                             tooltip="Scan settings and save to file"
@@ -98,13 +97,12 @@ const Configurator: React.FC<Props> = ({ history }) => {
                             onClick={() => setReadMode(false)}
                         />
                     </div>
-                </div>
-                <div className="mx-4 mt-6">
-                    <h1 className="font-semibold text-xl">
-                        <span className="inline-block w-6 font-light text-gray-400">3.</span>
-                        Preparation
-                    </h1>
-                    <p className="text-sm -mt-1">Prepare your game for the configurator to work correctly.</p>
+                </ConfiguratorStep>
+                <ConfiguratorStep
+                    titlePrefix="3"
+                    title="Preparation"
+                    description="Prepare your game for the configurator to work correctly."
+                >
                     <div className="mt-3">
                         <Checkbox
                             label="Go through the tutorial"
@@ -115,7 +113,7 @@ const Configurator: React.FC<Props> = ({ history }) => {
                             }}
                         />
                     </div>
-                </div>
+                </ConfiguratorStep>
             </PageTransition>
         </div>
     )
