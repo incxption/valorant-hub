@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Breadcrumb from "@components/window/Breadcrumb"
 import { History } from "history"
 import { IoIosArrowForward } from "react-icons/all"
@@ -57,6 +57,9 @@ const Preparation: React.FC<Props> = ({ history }) => {
     const [stepIndex, setStepIndex] = useState(0)
     const currentStep = steps[stepIndex]
 
+    const [loading, setLoading] = useState(true)
+    const [preloaded, setPreloaded] = useState(false)
+
     function next() {
         if (stepIndex === steps.length - 1) {
             history.push("/configurator")
@@ -64,6 +67,29 @@ const Preparation: React.FC<Props> = ({ history }) => {
             setStepIndex((prev) => prev + 1)
         }
     }
+
+    useEffect(() => {
+        if (!preloaded) {
+            const images = steps.map((step) => step.image)
+            cacheImages(images).then(() => setPreloaded(true))
+        }
+    }, [preloaded])
+
+    const cacheImages = async (srcArray: string[]) => {
+        const promises = await srcArray.map((src) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image()
+                img.src = src
+                img.onload = () => resolve("Load error")
+                img.onerror = () => reject()
+            })
+        })
+        await Promise.all(promises)
+
+        setLoading(false)
+    }
+
+    if (loading) return <p>Loading...</p>
 
     return (
         <div className="h-full w-full flex flex-col tracking-tight bg-cover relative">
@@ -87,8 +113,9 @@ const Preparation: React.FC<Props> = ({ history }) => {
                 </motion.div>
                 <motion.button
                     key={stepIndex + 1}
-                    animate={{ x: 0 }}
-                    initial={{ x: 200 }}
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
                     className="outline-none focus:outline-none ml-2 w-36 py-1.5 transition-colors bg-blue-500
                                border-2 border-blue-500 hover:border-blue-400 shadow-md text-white rounded-md"
                     onClick={next}
